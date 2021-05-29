@@ -26,8 +26,8 @@ import io.javabrains.ipldashboard.model.Match;
 public class BatchConfig {
 
     private final String[] FIELD_NAMES = new String[] {
-        "id", "city", "date", "player_of_match", "venue", "neutral_venue", "team1", "team2", "toss_winner", "toss_decision", "winner", "result", "result_margin", "eliminator", "method", "umpire1", "umpire2
-    }
+        "id", "city", "date", "player_of_match", "venue", "neutral_venue", "team1", "team2", "toss_winner", "toss_decision", "winner", "result", "result_margin", "eliminator", "method", "umpire1", "umpire2"
+    };
 
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -55,8 +55,9 @@ public class BatchConfig {
     public JdbcBatchItemWriter<Match> writer(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Match>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO match (id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, eliminator, umpire1, umpire2) "
-                        + " VALUES (:id :city :date :playerOfMatch :venue :team1 :team2 :tossWinner :tossDecision :matchWinner :result :resultMargin :eliminator :umpire1 :umpire2)")
+                .sql("INSERT INTO match " 
+                    + "(id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, eliminator, umpire1, umpire2) "
+                        + " VALUES (:id, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :eliminator, :umpire1, :umpire2)")
                 .dataSource(dataSource).build();
     }
 
