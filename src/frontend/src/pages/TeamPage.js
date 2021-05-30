@@ -12,12 +12,12 @@ export const TeamPage = () => {
     const {teamName} = useParams();
     useEffect(
         () => {
-            const fetchMatches = async () => {
+            const fetchTeams = async () => {
                 const response = await fetch(`http://localhost:8080/team/${teamName}`);
                 const data = await response.json();
                 setTeam(data);
             };
-            fetchMatches();
+            fetchTeams();
         }, [teamName] //[] call this on the page load //teamName the use effect runs and then fetch the data
     );
 
